@@ -4,8 +4,8 @@ Assessment of genome assemblies through various evaluation methods
 ## Motivation
 The [CHM13 data and analyses](https://github.com/nanopore-wgs-consortium/CHM13) from the [Telomere-to-Telomere consortium (T2T)](https://sites.google.com/ucsc.edu/t2tworkinggroup) contain BAC analyses for the Canu, Flye, and Shasta assemblies. Here we add QUAST analysis, followed by the table, for the same. 
 
-## QUAST results
-### QUAST vs. CHM13 draft v0.7
+## Results
+#### QUAST vs. CHM13 draft v0.7
 | | canu.contigs | flye.contigs | shasta.run1 | shasta.run2 |
 | --------- | ------ | ------ | ------ | ------ |
 | # contigs |  1223 |  472 |  648 |  297 |
@@ -35,20 +35,17 @@ The [CHM13 data and analyses](https://github.com/nanopore-wgs-consortium/CHM13) 
 | LA50 |  21 |  19 |  22 |  19 |
 | LGA50 |  21 |  20 |  23 |  20 | 
 
-
-
-
+## Comments
 ## Run commands
-### Shasta run 1
+#### Shasta run 1 - Assembly performed using Shasta commit b48017d3a3b3e7c0d652edba92da9bb88a02e30b
 
 	nohup bin/shastaDynamic --input rel3.fasta --Reads.minReadLength 50000 --MinHash.minBucketSize 5 --MinHash.maxBucketSize 30 --MinHash.minFrequency 5 --Align.minAlignedMarkerCount 400 --Align.minAlignedFraction 0.4 --Assembly.consensusCaller Bayesian:guppy-3.0.5-a --memoryMode filesystem --memoryBacking 2M --assemblyDirectory run1 1>run1.stdout 2>&1 &
 
-### Shasta run 2
+#### Shasta run 2 - Assembly performed using Shasta commit 8bb7d52d9f8622a8dee8c3fcfb58e4f4cd1ac9f8
 
 	nohup bin/shastaDynamic --input rel3.fasta --Reads.minReadLength 50000 --MinHash.minBucketSize 10 --MinHash.maxBucketSize 40 --MinHash.minFrequency 10 --MinHash.minHashIterationCount 0 --MinHash.alignmentCandidatesPerRead 10 --Align.minAlignedMarkerCount 400 --Align.minAlignedFraction 0.4 --Align.sameChannelReadAlignment.suppressDeltaThreshold 10 --Assembly.consensusCaller Bayesian:guppy-3.0.5-a --memoryMode filesystem --memoryBacking 2M --assemblyDirectory run2 1>run2.stdout 2>&1 &
 
-
-### QUAST - Analysis performed by Marina Haukness (UC Santa Cruz)
+#### QUAST - Analysis performed by Marina Haukness (UC Santa Cruz) using quast-5.0.2
 
 	quast-5.0.2/quast-lg.py --threads 128 -r ../chm13.draft_v0.7.fasta --large --min-identity 80 --fragmented Assembly.fasta
 
