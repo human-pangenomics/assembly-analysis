@@ -11,9 +11,6 @@ The [CHM13 data and analyses](https://github.com/nanopore-wgs-consortium/CHM13) 
 | # contigs |  1223 |  472 |  648 |  297 |
 | Largest contig |  139909728 |  132009996 |  128776686 |  130803838 |
 | Total length |  2991947723 |  2920201070 |  2835274591 |  2823384269 |
-| Reference length |  2938464690 |  2938464690 |  2938464690 |  2938464690 |
-| GC (%) |  40.92 |  40.96 |  40.92 |  40.9 |
-| Reference GC (%) |  40.88 |  40.88 |  40.88 |  40.88 |
 | N50 |  77964612 |  70319350 |  56347153 |  58111632 |
 | NG50 |  77964612 |  70319350 |  52402611 |  58088067 |
 | L50 |  15 |  16 |  17 |  17 |
@@ -22,8 +19,6 @@ The [CHM13 data and analyses](https://github.com/nanopore-wgs-consortium/CHM13) 
 | # misassembled contigs |  875 |  193 |  102 |  78 |
 | Misassembled contigs length |  2458710426 |  2440399207 |  1519592488 |  1351075153 |
 | # local misassemblies |  1164 |  981 |  179 |  129 |
-| # scaffold gap ext. mis. |  0 |  0 |  0 |  0 |
-| # scaffold gap loc. mis. |  0 |  1 |  0 |  0 |
 | # possible TEs |  160 |  96 |  16 |  14 |
 | # unaligned mis. contigs |  73 |  17 |  2 |  0 |
 | # unaligned contigs |  168 + 248 part |  8 + 135 part |  0 + 60 part |  0 + 37 part |
@@ -44,8 +39,18 @@ The [CHM13 data and analyses](https://github.com/nanopore-wgs-consortium/CHM13) 
 
 
 ## Run commands
-We ran QUAST using the following command:
+### Shasta run 1
 
+	nohup bin/shastaDynamic --input rel3.fasta --Reads.minReadLength 50000 --MinHash.minBucketSize 5 --MinHash.maxBucketSize 30 --MinHash.minFrequency 5 --Align.minAlignedMarkerCount 400 --Align.minAlignedFraction 0.4 --Assembly.consensusCaller Bayesian:guppy-3.0.5-a --memoryMode filesystem --memoryBacking 2M --assemblyDirectory run1 1>run1.stdout 2>&1 &
+
+### Shasta run 2
+
+	nohup bin/shastaDynamic --input rel3.fasta --Reads.minReadLength 50000 --MinHash.minBucketSize 10 --MinHash.maxBucketSize 40 --MinHash.minFrequency 10 --MinHash.minHashIterationCount 0 --MinHash.alignmentCandidatesPerRead 10 --Align.minAlignedMarkerCount 400 --Align.minAlignedFraction 0.4 --Align.sameChannelReadAlignment.suppressDeltaThreshold 10 --Assembly.consensusCaller Bayesian:guppy-3.0.5-a --memoryMode filesystem --memoryBacking 2M --assemblyDirectory run2 1>run2.stdout 2>&1 &
+
+
+### QUAST - Analysis performed by Marina Haukness (UC Santa Cruz)
+
+	quast-5.0.2/quast-lg.py --threads 128 -r ../chm13.draft_v0.7.fasta --large --min-identity 80 --fragmented Assembly.fasta
 
 
 
