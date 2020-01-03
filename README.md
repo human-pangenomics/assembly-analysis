@@ -1,4 +1,4 @@
-# assembly-analysis
+# Assembly analysis
 Assessment of genome assemblies through various evaluation methods
 
 ## Motivation
