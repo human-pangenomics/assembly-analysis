@@ -34,8 +34,6 @@ The [CHM13 data and analyses](https://github.com/nanopore-wgs-consortium/CHM13) 
 | LA50 |  21 |  19 |  19 |
 | LGA50 |  21 |  20 |  20 |
 
-## Comments
-
 ## Run commands
 #### Shasta run 2 - Assembly performed using Shasta commit 8bb7d52d9f8622a8dee8c3fcfb58e4f4cd1ac9f8
 
